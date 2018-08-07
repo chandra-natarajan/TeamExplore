@@ -34,10 +34,10 @@ def get_window_pairs(record, feature_window_nbeats, leadtime_nbeats, forecast_wi
             w1L, w1R = b - pos, b + forecast_window_nbeats - pos - 1
             w2L, w2R = w1L - leadtime_nbeats - feature_window_nbeats, w1L - leadtime_nbeats - 1
             used.extend([w1L,w1R])
-            #s1 = record.signal['ch1']['values'][ai[w2L]:ai[w2R]]
-            #s2 = record.signal['ch2']['values'][ai[w2L]:ai[w2R]]
-            s1 = record.signal['ch1']['values'][ai[w1L]:ai[w1R]]     # (for testing only)
-            s2 = record.signal['ch2']['values'][ai[w1L]:ai[w1R]]     # (for testing only)
+            s1 = record.signal['ch1']['values'][ai[w2L]:ai[w2R]]
+            s2 = record.signal['ch2']['values'][ai[w2L]:ai[w2R]]
+            #s1 = record.signal['ch1']['values'][ai[w1L]:ai[w1R]]     # (for testing only)
+            #s2 = record.signal['ch2']['values'][ai[w1L]:ai[w1R]]     # (for testing only)
             signal = np.array([s1,s2]).T
             wp = WindowPair('arrhythmic', signal)
             wps.append(wp)
@@ -53,10 +53,10 @@ def get_window_pairs(record, feature_window_nbeats, leadtime_nbeats, forecast_wi
     for p in pruned:
         w1L, w1R = avail[p[0]], avail[p[1]]
         w2L, w2R = w1L - leadtime_nbeats - feature_window_nbeats, w1L - leadtime_nbeats - 1
-        #s1 = record.signal['ch1']['values'][ai[w2L]:ai[w2R]]
-        #s2 = record.signal['ch2']['values'][ai[w2L]:ai[w2R]]
-        s1 = record.signal['ch1']['values'][ai[w1L]:ai[w1R]]     # (for testing only)
-        s2 = record.signal['ch2']['values'][ai[w1L]:ai[w1R]]     # (for testing only)
+        s1 = record.signal['ch1']['values'][ai[w2L]:ai[w2R]]
+        s2 = record.signal['ch2']['values'][ai[w2L]:ai[w2R]]
+        #s1 = record.signal['ch1']['values'][ai[w1L]:ai[w1R]]     # (for testing only)
+        #s2 = record.signal['ch2']['values'][ai[w1L]:ai[w1R]]     # (for testing only)
         signal = np.array([s1,s2]).T
         wp = WindowPair('normal', signal)
         wps.append(wp)
